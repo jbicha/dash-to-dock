@@ -436,9 +436,11 @@ const DockedDash = new Lang.Class({
         else
             Main.layoutManager._trackActor(this._slider.actor);
 
-        // Keep the dash below the modalDialogGroup
-        Main.layoutManager.uiGroup.set_child_below_sibling(this.actor,Main.layoutManager.modalDialogGroup);
-
+        // Keep the dash below the modalDialogGroup and the legacyTray
+        if (Main.legacyTray && Main.legacyTray.actor)
+            Main.layoutManager.uiGroup.set_child_below_sibling(this.actor, Main.legacyTray.actor);
+        else
+            Main.layoutManager.uiGroup.set_child_below_sibling(this.actor, Main.layoutManager.modalDialogGroup);
         // Set initial position
         this._resetPosition();
     },
